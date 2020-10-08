@@ -744,9 +744,9 @@ DisplayNode::resolveTraits()
 		remove
 	);
 
-	for (auto property : remove) this->update(property->getName(), nullptr);
-	for (auto property : update) this->update(property->getName(), property);
-	for (auto property : insert) this->update(property->getName(), property);
+	for (auto property : remove) this->updateProperty(property->getName(), nullptr);
+	for (auto property : update) this->updateProperty(property->getName(), property);
+	for (auto property : insert) this->updateProperty(property->getName(), property);
 
 	this->properties = properties;
 
@@ -990,7 +990,7 @@ DisplayNode::resolvePadding()
 }
 
 void
-DisplayNode::resolveWrapper(double w, double h)
+DisplayNode::resolveContent(double w, double h)
 {
 	this->resolveTraits();
 
@@ -2711,7 +2711,7 @@ void
 DisplayNode::reset()
 {
 	for (auto property : this->properties) {
-		this->update(property->getName(), nullptr);
+		this->updateProperty(property->getName(), nullptr);
 	}
 
 	this->properties.clear();

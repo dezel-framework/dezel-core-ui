@@ -230,7 +230,11 @@ protected:
 	void resolveInnerSize();
 	void resolveContentSize();
 	void resolvePadding();
-	void resolveWrapper(double width, double height);
+
+	void resolveContent(
+		double width,
+		double height
+	);
 
 	void performLayout();
 
@@ -325,7 +329,7 @@ protected:
 		}
 	}
 
-	void update(string name, Property* property) {
+	void updateProperty(string name, Property* property) {
 		if (this->updateCallback) {
 			this->updateCallback(
 				reinterpret_cast<DisplayNodeRef>(this),

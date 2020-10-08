@@ -496,7 +496,7 @@ AbsoluteLayoutResolver::measure(DisplayNode* child)
 
 	if (wrapW || wrapH) {
 
-		child->resolveWrapper(
+		child->resolveContent(
 			measuredW,
 			measuredH
 		);
