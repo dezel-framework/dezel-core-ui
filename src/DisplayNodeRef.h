@@ -30,11 +30,11 @@ void DisplayNodeDelete(DisplayNodeRef node);
 void DisplayNodeSetDisplay(DisplayNodeRef node, DisplayRef display);
 
 /**
- * @function DisplayNodeSetOpaque
- * @since 0.1.0
+ * @function DisplayNodeSetSealed
+ * @since 0.2.0
  * @hidden
  */
-void DisplayNodeSetOpaque(DisplayNodeRef node);
+void DisplayNodeSetSealed(DisplayNodeRef node);
 
 /**
  * @function DisplayNodeSetName

@@ -24,7 +24,7 @@ Display::setWindow(DisplayNode* window)
 {
 	this->window = window;
 	this->window->setWindow();
-	this->window->setOpaque();
+	this->window->setSealed();
 	this->invalidate();
 }
 

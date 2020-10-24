@@ -61,10 +61,10 @@ Descriptor::matchPath(DisplayNode* node, Importance& importance)
 			/*
 			 * The selector fragment didn't match the current node. Before
 			 * trying with the parent node, we must check whether the node is
-			 * the root of an opaque node.
+			 * the root of a sealed node.
 			 */
 
-			if (node->isOpaque() ||
+			if (node->isSealed() ||
 				node->isWindow()) {
 				break;
 			}

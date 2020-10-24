@@ -24,9 +24,9 @@ DisplayNodeSetDisplay(DisplayNodeRef node, DisplayRef display)
 }
 
 void
-DisplayNodeSetOpaque(DisplayNodeRef node)
+DisplayNodeSetSealed(DisplayNodeRef node)
 {
-	reinterpret_cast<DisplayNode*>(node)->setOpaque();
+	reinterpret_cast<DisplayNode*>(node)->setSealed();
 }
 
 void

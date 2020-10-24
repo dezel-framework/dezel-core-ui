@@ -49,7 +49,7 @@ using Style::Match;
 
 typedef enum {
 	kDisplayNodeFlagNone   = 0,
-	kDisplayNodeFlagOpaque = 1 << 0,
+	kDisplayNodeFlagSealed = 1 << 0,
 	kDisplayNodeFlagWindow = 1 << 1
 } DisplayNodeFlag;
 
@@ -360,8 +360,8 @@ public:
 		this->flags = this->flags | kDisplayNodeFlagWindow;
 	}
 
-	void setOpaque() {
-		this->flags = this->flags | kDisplayNodeFlagOpaque;
+	void setSealed() {
+		this->flags = this->flags | kDisplayNodeFlagSealed;
 	}
 
 	DisplayNode* getParent() const {
@@ -631,8 +631,8 @@ public:
 		return this->visible;
 	}
 
-	bool isOpaque() const {
-		return this->flags & kDisplayNodeFlagOpaque;
+	bool isSealed() const {
+		return this->flags & kDisplayNodeFlagSealed;
 	}
 
 	bool isWindow() const {
