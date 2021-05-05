@@ -37,6 +37,20 @@ void DisplayNodeSetDisplay(DisplayNodeRef node, DisplayRef display);
 void DisplayNodeSetSealed(DisplayNodeRef node);
 
 /**
+ * @function DisplayNodeSetRoot
+ * @since 0.2.0
+ * @hidden
+ */
+void DisplayNodeSetRoot(DisplayNodeRef node, DisplayNodeRef root);
+
+/**
+ * @function DisplayNodeSetHost
+ * @since 0.2.0
+ * @hidden
+ */
+void DisplayNodeSetHost(DisplayNodeRef node, DisplayNodeRef root);
+
+/**
  * @function DisplayNodeSetName
  * @since 0.1.0
  * @hidden
@@ -681,7 +695,7 @@ double DisplayNodeGetMeasuredPaddingBottom(DisplayNodeRef node);
 void DisplayNodeSetVisible(DisplayNodeRef node, bool visible);
 
 /**
- * @function DisplayNodeInsertChild
+ * @function DisplayNodeAppendChild
  * @since 0.1.0
  * @hidden
  */

@@ -30,6 +30,18 @@ DisplayNodeSetSealed(DisplayNodeRef node)
 }
 
 void
+DisplayNodeSetRoot(DisplayNodeRef node, DisplayNodeRef root)
+{
+	reinterpret_cast<DisplayNode*>(node)->setRoot(reinterpret_cast<DisplayNode*>(root));
+}
+
+void
+DisplayNodeSetHost(DisplayNodeRef node, DisplayNodeRef host)
+{
+	reinterpret_cast<DisplayNode*>(node)->setHost(reinterpret_cast<DisplayNode*>(host));
+}
+
+void
 DisplayNodeSetName(DisplayNodeRef node, const char* name)
 {
 	reinterpret_cast<DisplayNode*>(node)->setName(name);

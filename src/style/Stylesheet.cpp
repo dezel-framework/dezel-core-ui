@@ -176,6 +176,7 @@ void
 Stylesheet::setVariable(string name, string value)
 {
 	vector<Value*> values;
+
 	Parser::parse(values, value);
 
 	auto variable = new Variable(name);

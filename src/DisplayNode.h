@@ -68,6 +68,9 @@ private:
 
 	Display* display = nullptr;
 
+	DisplayNode* root = nullptr;
+	DisplayNode* host = nullptr;
+    
 	DisplayNode* window = nullptr;
 	DisplayNode* parent = nullptr;
     vector<DisplayNode*> children;
@@ -363,6 +366,14 @@ public:
 	void setSealed() {
 		this->flags = this->flags | kDisplayNodeFlagSealed;
 	}
+    
+	void setRoot(DisplayNode* root) {
+		this->root = root;
+	}
+    
+	void setHost(DisplayNode* host) {
+		this->host = host;
+	}
 
 	DisplayNode* getParent() const {
 		return this->parent;
@@ -371,7 +382,7 @@ public:
 	const vector<DisplayNode*>& getChildren() const {
 		return this->children;
 	}
-
+    
 	void setName(string name);
 	void setType(string type);
 	void appendStyle(string style);
@@ -623,6 +634,8 @@ public:
 		return this->measuredPaddingBottom;
 	}
 
+	void attachChild(DisplayNode* child);
+	void detachChild(DisplayNode* child);
 	void appendChild(DisplayNode* child);
 	void insertChild(DisplayNode* child, int index);
 	void removeChild(DisplayNode* child);
