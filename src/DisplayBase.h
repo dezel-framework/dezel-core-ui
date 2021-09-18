@@ -77,84 +77,103 @@ typedef struct {
 } ParseError;
 
 /**
- * @type SizeType
+ * @type DisplayNodeAnchorType
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kAnchorTypeLength = 1
-} AnchorType;
+	kDisplayNodeAnchorTypeLength = 1
+} DisplayNodeAnchorType;
 
 /**
- * @type AnchorUnit
+ * @type DisplayNodeAnchorUnit
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kAnchorUnitPX = 1,
-	kAnchorUnitPC = 2,
-	kAnchorUnitVW = 3,
-	kAnchorUnitVH = 4,
-	kAnchorUnitPW = 5,
-	kAnchorUnitPH = 6,
-	kAnchorUnitCW = 7,
-	kAnchorUnitCH = 8
-} AnchorUnit;
+	kDisplayNodeAnchorUnitPX = 1,
+	kDisplayNodeAnchorUnitPC = 2,
+	kDisplayNodeAnchorUnitVW = 3,
+	kDisplayNodeAnchorUnitVH = 4,
+	kDisplayNodeAnchorUnitPW = 5,
+	kDisplayNodeAnchorUnitPH = 6,
+	kDisplayNodeAnchorUnitCW = 7,
+	kDisplayNodeAnchorUnitCH = 8
+} DisplayNodeAnchorUnit;
 
 /**
- * @type SizeType
+ * @type DisplayNodeSizeType
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kSizeTypeFill = 1,
-	kSizeTypeWrap = 2,
-	kSizeTypeLength = 3
-} SizeType;
+	kDisplayNodeSizeTypeFill = 1,
+	kDisplayNodeSizeTypeWrap = 2,
+	kDisplayNodeSizeTypeLength = 3
+} DisplayNodeSizeType;
 
 /**
- * @type SizeUnit
+ * @type DisplayNodeSizeUnit
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kSizeUnitNone = 1,
-	kSizeUnitPX = 2,
-	kSizeUnitPC = 3,
-	kSizeUnitVW = 4,
-	kSizeUnitVH = 5,
-	kSizeUnitPW = 6,
-	kSizeUnitPH = 7,
-	kSizeUnitCW = 8,
-	kSizeUnitCH = 9
-} SizeUnit;
+	kDisplayNodeSizeUnitNone = 1,
+	kDisplayNodeSizeUnitPX = 2,
+	kDisplayNodeSizeUnitPC = 3,
+	kDisplayNodeSizeUnitVW = 4,
+	kDisplayNodeSizeUnitVH = 5,
+	kDisplayNodeSizeUnitPW = 6,
+	kDisplayNodeSizeUnitPH = 7,
+	kDisplayNodeSizeUnitCW = 8,
+	kDisplayNodeSizeUnitCH = 9
+} DisplayNodeSizeUnit;
 
 /**
- * @type OriginType
+ * @type DisplayNodePositionType
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kOriginTypeAuto = 1,
-	kOriginTypeLength = 2
-} OriginType;
+	kDisplayNodePositionTypeAuto = 1,
+	kDisplayNodePositionTypeLength = 2
+} DisplayNodePositionType;
 
 /**
- * @type OriginUnit
+ * @type DisplayNodePositionUnit
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kOriginUnitNone = 1,
-	kOriginUnitPX = 2,
-	kOriginUnitPC = 3,
-	kOriginUnitVW = 4,
-	kOriginUnitVH = 5,
-	kOriginUnitPW = 6,
-	kOriginUnitPH = 7,
-	kOriginUnitCW = 8,
-	kOriginUnitCH = 9
-} OriginUnit;
+	kDisplayNodePositionUnitNone = 1,
+	kDisplayNodePositionUnitPX = 2,
+	kDisplayNodePositionUnitPC = 3,
+	kDisplayNodePositionUnitVW = 4,
+	kDisplayNodePositionUnitVH = 5,
+	kDisplayNodePositionUnitPW = 6,
+	kDisplayNodePositionUnitPH = 7,
+	kDisplayNodePositionUnitCW = 8,
+	kDisplayNodePositionUnitCH = 9
+} DisplayNodePositionUnit;
+
+/**
+ * @type DisplayNodeContentPositionType
+ * @since 0.1.0
+ * @hidden
+ */
+typedef enum {
+	kDisplayNodeContentPositionTypeLength = 1
+} DisplayNodeContentPositionType;
+
+/**
+ * @type DisplayNodeContentPositionUnit
+ * @since 0.1.0
+ * @hidden
+ */
+typedef enum {
+	kDisplayNodeContentPositionUnitNone = 1,
+	kDisplayNodeContentPositionUnitPX = 2
+} DisplayNodeContentPositionUnit;
 
 /**
  * @type DisplayNodeContentSize
@@ -162,155 +181,136 @@ typedef enum {
  * @hidden
  */
 typedef enum {
-	kContentOriginTypeLength = 1
-} ContentOriginType;
+	kDisplayNodeContentSizeTypeAuto = 1,
+	kDisplayNodeContentSizeTypeLength = 2,
+} DisplayNodeContentSizeType;
 
 /**
- * @type ContentOriginUnit
+ * @type DisplayNodeContentSizeUnit
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kContentOriginUnitNone = 1,
-	kContentOriginUnitPX = 2
-} ContentOriginUnit;
+	kDisplayNodeContentSizeUnitNone = 1,
+	kDisplayNodeContentSizeUnitPX = 2,
+	kDisplayNodeContentSizeUnitPC = 3,
+	kDisplayNodeContentSizeUnitVW = 4,
+	kDisplayNodeContentSizeUnitVH = 5,
+	kDisplayNodeContentSizeUnitPW = 6,
+	kDisplayNodeContentSizeUnitPH = 7,
+	kDisplayNodeContentSizeUnitCW = 8,
+	kDisplayNodeContentSizeUnitCH = 9
+} DisplayNodeContentSizeUnit;
 
 /**
- * @type DisplayNodeContentSize
+ * @type DisplayNodeContentDirection
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kContentSizeTypeAuto = 1,
-	kContentSizeTypeLength = 2,
-} ContentSizeType;
+	kDisplayNodeContentDirectionVertical = 1,
+	kDisplayNodeContentDirectionHorizontal = 2
+} DisplayNodeContentDirection;
 
 /**
- * @type ContentSizeUnit
+ * @type DisplayNodeContentDisposition
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kContentSizeUnitNone = 1,
-	kContentSizeUnitPX = 2,
-	kContentSizeUnitPC = 3,
-	kContentSizeUnitVW = 4,
-	kContentSizeUnitVH = 5,
-	kContentSizeUnitPW = 6,
-	kContentSizeUnitPH = 7,
-	kContentSizeUnitCW = 8,
-	kContentSizeUnitCH = 9
-} ContentSizeUnit;
+	kDisplayNodeContentDispositionStart = 1,
+	kDisplayNodeContentDispositionCenter = 2,
+	kDisplayNodeContentDispositionEnd = 3,
+	kDisplayNodeContentDispositionSpaceAround = 4,
+	kDisplayNodeContentDispositionSpaceBetween = 5,
+	kDisplayNodeContentDispositionSpaceEvenly = 6
+} DisplayNodeContentDisposition;
 
 /**
- * @type ContentDirection
+ * @type DisplayNodeContentAlignment
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kContentDirectionVertical = 1,
-	kContentDirectionHorizontal = 2
-} ContentDirection;
+	kDisplayNodeContentAlignmentStart = 1,
+	kDisplayNodeContentAlignmentCenter = 2,
+	kDisplayNodeContentAlignmentEnd = 3,
+} DisplayNodeContentAlignment;
 
 /**
- * @type ContentAlignment
+ * @type DisplayNodeBorderType
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kContentDispositionStart = 1,
-	kContentDispositionCenter = 2,
-	kContentDispositionEnd = 3,
-	kContentDispositionSpaceAround = 4,
-	kContentDispositionSpaceBetween = 5,
-	kContentDispositionSpaceEvenly = 6
-} ContentDisposition;
+    kDisplayNodeBorderTypeLength = 1
+} DisplayNodeBorderType;
 
 /**
- * @type ContentAlignment
+ * @type DisplayNodeBorderUnit
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kContentAlignmentStart = 1,
-	kContentAlignmentCenter = 2,
-	kContentAlignmentEnd = 3,
-} ContentAlignment;
+    kDisplayNodeBorderUnitPX = 1,
+    kDisplayNodeBorderUnitPC = 2,
+    kDisplayNodeBorderUnitVW = 3,
+    kDisplayNodeBorderUnitVH = 4,
+	kDisplayNodeBorderUnitPW = 5,
+	kDisplayNodeBorderUnitPH = 6,
+	kDisplayNodeBorderUnitCW = 7,
+	kDisplayNodeBorderUnitCH = 8
+} DisplayNodeBorderUnit;
 
 /**
- * @type MarginType
+ * @type DisplayNodeMarginType
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-    kBorderTypeLength = 1
-} BorderType;
+	kDisplayNodeMarginTypeLength = 1
+} DisplayNodeMarginType;
 
 /**
- * @type BorderUnit
+ * @type DisplayNodeMarginUnit
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-    kBorderUnitPX = 1,
-    kBorderUnitPC = 2,
-    kBorderUnitVW = 3,
-    kBorderUnitVH = 4,
-	kBorderUnitPW = 5,
-	kBorderUnitPH = 6,
-	kBorderUnitCW = 7,
-	kBorderUnitCH = 8
-} BorderUnit;
+	kDisplayNodeMarginUnitPX = 1,
+	kDisplayNodeMarginUnitPC = 2,
+	kDisplayNodeMarginUnitVW = 3,
+	kDisplayNodeMarginUnitVH = 4,
+	kDisplayNodeMarginUnitPW = 5,
+	kDisplayNodeMarginUnitPH = 6,
+	kDisplayNodeMarginUnitCW = 7,
+	kDisplayNodeMarginUnitCH = 8
+} DisplayNodeMarginUnit;
 
 /**
- * @type MarginType
+ * @type DisplayNodePaddingType
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kMarginTypeLength = 1
-} MarginType;
+	kDisplayNodePaddingTypeLength = 1
+} DisplayNodePaddingType;
 
 /**
- * @type MarginUnit
+ * @type DisplayNodePaddingUnit
  * @since 0.1.0
  * @hidden
  */
 typedef enum {
-	kMarginUnitPX = 1,
-	kMarginUnitPC = 2,
-	kMarginUnitVW = 3,
-	kMarginUnitVH = 4,
-	kMarginUnitPW = 5,
-	kMarginUnitPH = 6,
-	kMarginUnitCW = 7,
-	kMarginUnitCH = 8
-} MarginUnit;
-
-/**
- * @type PaddingType
- * @since 0.1.0
- * @hidden
- */
-typedef enum {
-	kPaddingTypeLength = 1
-} PaddingType;
-
-/**
- * @type PaddingUnit
- * @since 0.1.0
- * @hidden
- */
-typedef enum {
-	kPaddingUnitPX = 1,
-	kPaddingUnitPC = 2,
-	kPaddingUnitVW = 3,
-	kPaddingUnitVH = 4,
-	kPaddingUnitPW = 5,
-	kPaddingUnitPH = 6,
-	kPaddingUnitCW = 7,
-	kPaddingUnitCH = 8
-} PaddingUnit;
+	kDisplayNodePaddingUnitPX = 1,
+	kDisplayNodePaddingUnitPC = 2,
+	kDisplayNodePaddingUnitVW = 3,
+	kDisplayNodePaddingUnitVH = 4,
+	kDisplayNodePaddingUnitPW = 5,
+	kDisplayNodePaddingUnitPH = 6,
+	kDisplayNodePaddingUnitCW = 7,
+	kDisplayNodePaddingUnitCH = 8
+} DisplayNodePaddingUnit;
 
 /**
  * @typedef MeasuredSize

@@ -4,12 +4,12 @@
 #include "DisplayBase.h"
 #include "DisplayNodeAnchor.h"
 #include "DisplayNodeSize.h"
-#include "DisplayNodeOrigin.h"
+#include "DisplayNodePosition.h"
 #include "DisplayNodeMargin.h"
 #include "DisplayNodeBorder.h"
 #include "DisplayNodePadding.h"
 #include "DisplayNodeContentSize.h"
-#include "DisplayNodeContentOrigin.h"
+#include "DisplayNodeContentPosition.h"
 #include "LayoutResolver.h"
 #include "RelativeLayoutResolver.h"
 #include "AbsoluteLayoutResolver.h"
@@ -49,8 +49,7 @@ using Style::Match;
 
 typedef enum {
 	kDisplayNodeFlagNone   = 0,
-	kDisplayNodeFlagSealed = 1 << 0,
-	kDisplayNodeFlagWindow = 1 << 1
+	kDisplayNodeFlagWindow = 1 << 0
 } DisplayNodeFlag;
 
 inline DisplayNodeFlag operator|(DisplayNodeFlag a, DisplayNodeFlag b)
@@ -68,8 +67,8 @@ private:
 
 	Display* display = nullptr;
 
-	DisplayNode* root = nullptr;
 	DisplayNode* host = nullptr;
+    DisplayNode* root = nullptr;
     
 	DisplayNode* window = nullptr;
 	DisplayNode* parent = nullptr;
@@ -87,20 +86,20 @@ private:
 	DisplayNodeAnchor anchorTop;
 	DisplayNodeAnchor anchorLeft;
 
-	DisplayNodeOrigin top;
-	DisplayNodeOrigin left;
-	DisplayNodeOrigin right;
-	DisplayNodeOrigin bottom;
+	DisplayNodePosition top;
+	DisplayNodePosition left;
+	DisplayNodePosition right;
+	DisplayNodePosition bottom;
 
 	DisplayNodeSize width;
 	DisplayNodeSize height;
 
-	ContentDirection contentDirection = kContentDirectionVertical;
-	ContentAlignment contentAlignment = kContentAlignmentStart;
-	ContentDisposition contentDisposition = kContentDispositionStart;
+	DisplayNodeContentDirection contentDirection = kDisplayNodeContentDirectionVertical;
+	DisplayNodeContentAlignment contentAlignment = kDisplayNodeContentAlignmentStart;
+	DisplayNodeContentDisposition contentDisposition = kDisplayNodeContentDispositionStart;
 
-	DisplayNodeContentOrigin contentTop;
-	DisplayNodeContentOrigin contentLeft;
+	DisplayNodeContentPosition contentTop;
+	DisplayNodeContentPosition contentLeft;
 	DisplayNodeContentSize contentWidth;
 	DisplayNodeContentSize contentHeight;
 
@@ -119,21 +118,21 @@ private:
 	DisplayNodePadding paddingRight;
 	DisplayNodePadding paddingBottom;
 
-    double expandFactor = 0;
-	double shrinkFactor = 0;
+    double expandRatio = 0;
+	double shrinkRatio = 0;
 
 	bool invalid = false;
    	bool invalidSize = false;
-	bool invalidOrigin = false;
+	bool invalidPosition = false;
 	bool invalidMargin = false;
 	bool invalidBorder = false;
 	bool invalidInnerSize = false;
 	bool invalidContentSize = false;
-	bool invalidContentOrigin = false;
+	bool invalidContentPosition = false;
 	bool invalidPadding = false;
-	bool invalidExtent = false;
 	bool invalidLayout = false;
-	bool invalidTraits = false;
+	
+    bool invalidTraits = false; // WAT
 	bool invalidStyleTraits = false;
 	bool invalidStateTraits = false;
 
@@ -141,11 +140,12 @@ private:
 
 	DisplayNodeCallback invalidateCallback = nullptr;
 	DisplayNodeCallback resolveSizeCallback = nullptr;
-	DisplayNodeCallback resolveOriginCallback = nullptr;
+	DisplayNodeCallback resolvePositionCallback = nullptr;
 	DisplayNodeCallback resolveInnerSizeCallback = nullptr;
 	DisplayNodeCallback resolveContentSizeCallback = nullptr;
-	DisplayNodeCallback resolveMarginsCallback = nullptr;
-	DisplayNodeCallback resolveBordersCallback = nullptr;
+    DisplayNodeCallback resolveContentPositionCallback = nullptr;
+	DisplayNodeCallback resolveMarginCallback = nullptr;
+	DisplayNodeCallback resolveBorderCallback = nullptr;
 	DisplayNodeCallback resolvePaddingCallback = nullptr;
 	DisplayNodeCallback prepareLayoutCallback = nullptr;
 	DisplayNodeCallback resolveLayoutCallback = nullptr;
@@ -153,23 +153,6 @@ private:
 	DisplayNodeUpdateCallback updateCallback = nullptr;
 
 	LayoutResolver layout;
-
-	bool resolving = false;
-	bool resolvedSize = false;
-	bool resolvedOrigin = false;
-
-	DisplayNode* resolvedParent = nullptr;
-	DisplayNode* resolvedWindow = nullptr;
-
-	bool inheritedWrappedContentWidth = false;
-	bool inheritedWrappedContentHeight = false;
-
-	bool measuredWidthChanged = false;
-	bool measuredHeightChanged = false;
-	bool measuredInnerWidthChanged = false;
-	bool measuredInnerHeightChanged = false;
-	bool measuredContentWidthChanged = false;
-	bool measuredContentHeightChanged = false;
 
     double measuredTop = 0;
 	double measuredLeft = 0;
@@ -196,49 +179,60 @@ private:
 	double measuredPaddingRight = 0;
 	double measuredPaddingBottom = 0;
 
-	double lastMeasuredWidth = 0;
-	double lastMeasuredHeight = 0;
+    bool processing = false;
 
+    DisplayNode* resolvedParent = nullptr;
+    DisplayNode* resolvedWindow = nullptr;
+    
+    double resolvedWidth = 0;
+    double resolvedHeight = 0;
+    double resolvedInnerWidth = 0;
+    double resolvedInnerHeight = 0;
+    double resolvedContentWidth = 0;
+    double resolvedContentHeight = 0;
+    
 	void explode(string type);
 
 protected:
 
 	bool hasInvalidSize();
-	bool hasInvalidOrigin();
+	bool hasInvalidPosition();
 	bool hasInvalidInnerSize();
 	bool hasInvalidContentSize();
-	bool hasInvalidMargins();
-	bool hasInvalidBorders();
+    bool hasInvalidContentPosition();
+	bool hasInvalidMargin();
+	bool hasInvalidBorder();
 	bool hasInvalidPadding();
 	bool hasInvalidLayout();
 
 	void invalidate();
 	void invalidateInnerSize();
 	void invalidateContentSize();
-	void invalidateContentOrigin();
-	void invalidateMargins();
-	void invalidateBorders();
+	void invalidateContentPosition();
+	void invalidateMargin();
+	void invalidateBorder();
 	void invalidatePadding();
-	void invalidateExtent();
 	void invalidateParent();
-	void invalidateTraits();
-	void invalidateStyleTraits();
-	void invalidateStateTraits();
+    
+	void invalidateValues(); 
+	void invalidateStyles();
+	void invalidateStates();
 
-	bool inheritsWrappedWidth();
-	bool inheritsWrappedHeight();
+	bool isWrappingWidth();
+	bool isWrappingHeight();
 
-	void resolveMargins();
-	void resolveBorders();
-	void resolveInnerSize();
+	void resolveMargin();
+	void resolveBorder();
+    void resolvePadding();
+    void resolveInnerSize();
 	void resolveContentSize();
-	void resolvePadding();
+    void resolveContentPosition();
 
-	void resolveContent(
-		double width,
-		double height
+	void measureContent(
+		double &w,
+		double &h
 	);
-
+    void test(double w, double h);
 	void performLayout();
 
 	double measureAnchorTop();
@@ -257,9 +251,13 @@ protected:
 	double measurePaddingBottom();
 	double measureInnerWidth();
 	double measureInnerHeight();
+    double measureContentTop();
+    double measureContentLeft();
 	double measureContentWidth();
 	double measureContentHeight();
 
+    void finish();
+    
 	void reset();
 
 	bool hasNewParent() {
@@ -278,9 +276,9 @@ protected:
 		}
 	}
 
-	void didResolveOrigin() {
-		if (this->resolveOriginCallback) {
-			this->resolveOriginCallback(reinterpret_cast<DisplayNodeRef>(this));
+	void didResolvePosition() {
+		if (this->resolvePositionCallback) {
+			this->resolvePositionCallback(reinterpret_cast<DisplayNodeRef>(this));
 		}
 	}
 
@@ -296,15 +294,23 @@ protected:
 		}
 	}
 
-	void didResolveMargins() {
-		if (this->resolveMarginsCallback) {
-			this->resolveMarginsCallback(reinterpret_cast<DisplayNodeRef>(this));
+    void didResolveContentPosition() {
+		std::cout << "TEST ??? \n";
+		if (this->resolveContentPositionCallback) {
+			std::cout << "TEST !!! \n";
+            this->resolveContentPositionCallback(reinterpret_cast<DisplayNodeRef>(this));
+        }
+    }
+    
+	void didResolveMargin() {
+		if (this->resolveMarginCallback) {
+			this->resolveMarginCallback(reinterpret_cast<DisplayNodeRef>(this));
 		}
 	}
 
-	void didResolveBorders() {
-		if (this->resolveBordersCallback) {
-			this->resolveBordersCallback(reinterpret_cast<DisplayNodeRef>(this));
+	void didResolveBorder() {
+		if (this->resolveBorderCallback) {
+			this->resolveBorderCallback(reinterpret_cast<DisplayNodeRef>(this));
 		}
 	}
 
@@ -362,23 +368,31 @@ public:
 	void setWindow() {
 		this->flags = this->flags | kDisplayNodeFlagWindow;
 	}
-
-	void setSealed() {
-		this->flags = this->flags | kDisplayNodeFlagSealed;
-	}
     
-	void setRoot(DisplayNode* root) {
-		this->root = root;
-	}
+    void setRoot(DisplayNode* root) {
+        this->root = root;
+    }
     
 	void setHost(DisplayNode* host) {
 		this->host = host;
 	}
+        
+    DisplayNode* getRoot() const {
+        return this->root;
+    }
+    
+    DisplayNode* getHost() const {
+        return this->host;
+    }
 
-	DisplayNode* getParent() const {
-		return this->parent;
-	}
-
+    DisplayNode* getParent() const {
+        return this->parent;
+    }
+    
+    DisplayNode* getHolder() const {
+        return this->host ? this->host : this->parent;
+    }
+    
 	const vector<DisplayNode*>& getChildren() const {
 		return this->children;
 	}
@@ -428,13 +442,13 @@ public:
 
 	void setVisible(bool visible);
 
-	void setAnchorTop(AnchorType type, AnchorUnit unit, double length);
-	void setAnchorLeft(AnchorType type, AnchorUnit unit, double length);
+	void setAnchorTop(DisplayNodeAnchorType type, DisplayNodeAnchorUnit unit, double length);
+	void setAnchorLeft(DisplayNodeAnchorType type, DisplayNodeAnchorUnit unit, double length);
 
-	void setTop(OriginType type, OriginUnit unit, double length);
-	void setLeft(OriginType type, OriginUnit unit, double length);
-	void setRight(OriginType type, OriginUnit unit, double length);
-	void setBottom(OriginType type, OriginUnit unit, double length);
+	void setTop(DisplayNodePositionType type, DisplayNodePositionUnit unit, double length);
+	void setLeft(DisplayNodePositionType type, DisplayNodePositionUnit unit, double length);
+	void setRight(DisplayNodePositionType type, DisplayNodePositionUnit unit, double length);
+	void setBottom(DisplayNodePositionType type, DisplayNodePositionUnit unit, double length);
 
 	void setMinTop(double min);
 	void setMaxTop(double max);
@@ -445,35 +459,35 @@ public:
 	void setMinBottom(double min);
 	void setMaxBottom(double max);
 
-	void setWidth(SizeType type, SizeUnit unit, double length);
-	void setHeight(SizeType type, SizeUnit unit, double length);
+	void setWidth(DisplayNodeSizeType type, DisplayNodeSizeUnit unit, double length);
+	void setHeight(DisplayNodeSizeType type, DisplayNodeSizeUnit unit, double length);
 
 	void setMinWidth(double min);
 	void setMaxWidth(double max);
 	void setMinHeight(double min);
 	void setMaxHeight(double max);
 
-	void setContentDirection(ContentDirection direction);
-	void setContentAlignment(ContentAlignment alignment);
-	void setContentDisposition(ContentDisposition placement);
+	void setContentDirection(DisplayNodeContentDirection direction);
+	void setContentAlignment(DisplayNodeContentAlignment alignment);
+	void setContentDisposition(DisplayNodeContentDisposition placement);
 
-	void setContentTop(ContentOriginType type, ContentOriginUnit unit, double length);
-	void setContentLeft(ContentOriginType type, ContentOriginUnit unit, double length);
-	void setContentWidth(ContentSizeType type, ContentSizeUnit unit, double length);
-	void setContentHeight(ContentSizeType type, ContentSizeUnit unit, double length);
+	void setContentTop(DisplayNodeContentPositionType type, DisplayNodeContentPositionUnit unit, double length);
+	void setContentLeft(DisplayNodeContentPositionType type, DisplayNodeContentPositionUnit unit, double length);
+	void setContentWidth(DisplayNodeContentSizeType type, DisplayNodeContentSizeUnit unit, double length);
+	void setContentHeight(DisplayNodeContentSizeType type, DisplayNodeContentSizeUnit unit, double length);
 
-	void setExpandFactor(double factor);
-	void setShrinkFactor(double factor);
+	void setExpandRatio(double factor); // WAT rename expand
+	void setShrinkRatio(double factor); // WAT rename shrink
 
-	void setBorderTop(BorderType type, BorderUnit unit, double length);
-	void setBorderLeft(BorderType type, BorderUnit unit, double length);
-	void setBorderRight(BorderType type, BorderUnit unit, double length);
-	void setBorderBottom(BorderType type, BorderUnit unit, double length);
+	void setBorderTop(DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length);
+	void setBorderLeft(DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length);
+	void setBorderRight(DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length);
+	void setBorderBottom(DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length);
 
-	void setMarginTop(MarginType type, MarginUnit unit, double length);
-	void setMarginLeft(MarginType type, MarginUnit unit, double length);
-	void setMarginRight(MarginType type, MarginUnit unit, double length);
-	void setMarginBottom(MarginType type, MarginUnit unit, double length);
+	void setMarginTop(DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length);
+	void setMarginLeft(DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length);
+	void setMarginRight(DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length);
+	void setMarginBottom(DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length);
 
 	void setMinMarginTop(double min);
 	void setMaxMarginTop(double max);
@@ -484,10 +498,10 @@ public:
 	void setMinMarginBottom(double min);
 	void setMaxMarginBottom(double max);
 
-	void setPaddingTop(PaddingType type, PaddingUnit unit, double length);
-	void setPaddingLeft(PaddingType type, PaddingUnit unit, double length);
-	void setPaddingRight(PaddingType type, PaddingUnit unit, double length);
-	void setPaddingBottom(PaddingType type, PaddingUnit unit, double length);
+	void setPaddingTop(DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length);
+	void setPaddingLeft(DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length);
+	void setPaddingRight(DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length);
+	void setPaddingBottom(DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length);
 
 	void setMinPaddingTop(double min);
 	void setMaxPaddingTop(double max);
@@ -506,8 +520,8 @@ public:
 		this->resolveSizeCallback = callback;
 	}
 
-	void setResolveOriginCallback(DisplayNodeCallback callback) {
-		this->resolveOriginCallback = callback;
+	void setResolvePositionCallback(DisplayNodeCallback callback) {
+		this->resolvePositionCallback = callback;
 	}
 
 	void setResolveInnerSizeCallback(DisplayNodeCallback callback) {
@@ -517,13 +531,17 @@ public:
 	void setResolveContentSizeCallback(DisplayNodeCallback callback) {
 		this->resolveContentSizeCallback = callback;
 	}
+    
+    void setResolveContentPositionCallback(DisplayNodeCallback callback) {
+        this->resolveContentPositionCallback = callback;
+    }
 
-	void setResolveMarginsCallback(DisplayNodeCallback callback) {
-		this->resolveMarginsCallback = callback;
+	void setResolveMarginCallback(DisplayNodeCallback callback) {
+		this->resolveMarginCallback = callback;
 	}
 
-	void setResolveBordersCallback(DisplayNodeCallback callback) {
-		this->resolveBordersCallback = callback;
+	void setResolveBorderCallback(DisplayNodeCallback callback) {
+		this->resolveBorderCallback = callback;
 	}
 
 	void setResolvePaddingCallback(DisplayNodeCallback callback) {
@@ -543,7 +561,7 @@ public:
 	}
 
 	void setUpdateCallback(DisplayNodeUpdateCallback callback) {
-		this->updateCallback = callback;
+		this->updateCallback = callback; // WAT rename
 	}
 
 	double getMeasuredTop() const {
@@ -640,61 +658,56 @@ public:
 	void insertChild(DisplayNode* child, int index);
 	void removeChild(DisplayNode* child);
 
+    bool isWindow() const {
+        return this->flags & kDisplayNodeFlagWindow;
+    }
+    
 	bool isVisible() const {
 		return this->visible;
 	}
 
-	bool isSealed() const {
-		return this->flags & kDisplayNodeFlagSealed;
-	}
-
-	bool isWindow() const {
-		return this->flags & kDisplayNodeFlagWindow;
-	}
-
-	bool isRelative() const {
+    bool isRelative() const {
 		return (
-			this->top.type == kOriginTypeAuto &&
-			this->left.type == kOriginTypeAuto &&
-			this->right.type == kOriginTypeAuto &&
-			this->bottom.type == kOriginTypeAuto
+			this->top.type == kDisplayNodePositionTypeAuto &&
+			this->left.type == kDisplayNodePositionTypeAuto &&
+			this->right.type == kDisplayNodePositionTypeAuto &&
+			this->bottom.type == kDisplayNodePositionTypeAuto
 		);
 	}
 
 	bool isAbsolute() const {
 		return (
-			this->top.type == kOriginTypeLength ||
-			this->left.type == kOriginTypeLength ||
-			this->right.type == kOriginTypeLength ||
-			this->bottom.type == kOriginTypeLength
+			this->top.type == kDisplayNodePositionTypeLength ||
+			this->left.type == kDisplayNodePositionTypeLength ||
+			this->right.type == kDisplayNodePositionTypeLength ||
+			this->bottom.type == kDisplayNodePositionTypeLength
 		);
 	}
 
 	bool isFillingParentWidth() const {
-		return this->width.type == kSizeTypeFill;
+		return this->width.type == kDisplayNodeSizeTypeFill;
 	}
 
 	bool isFillingParentHeight() const {
-		return this->height.type == kSizeTypeFill;
+		return this->height.type == kDisplayNodeSizeTypeFill;
 	}
 
 	bool isWrappingContentWidth() const {
-		return this->width.type == kSizeTypeWrap;
+		return this->width.type == kDisplayNodeSizeTypeWrap;
 	}
 
 	bool isWrappingContentHeight() const {
-		return this->height.type == kSizeTypeWrap;
+		return this->height.type == kDisplayNodeSizeTypeWrap;
 	}
 
 	void invalidateSize();
-	void invalidateOrigin();
+	void invalidatePosition();
 	void invalidateLayout();
 
 	void measure();
 	void resolve();
-	void cleanup();
 
-	void resolveTraits();
+	void resolveValues();
 	void resolveLayout();
 
 	string toString();

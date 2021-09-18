@@ -127,8 +127,8 @@ public:
 	}
 
 	void invalidate();
+    void measure();
 	void resolve();
-	void cleanup();
 
 };
 

@@ -19,27 +19,27 @@ class LayoutResolver {
 private:
 
 	DisplayNode* node;
-	RelativeLayoutResolver relativeLayout;
-	AbsoluteLayoutResolver absoluteLayout;
+	RelativeLayoutResolver relativeLayoutResolver;
+	AbsoluteLayoutResolver absoluteLayoutResolver;
 
 public:
 
 	LayoutResolver(DisplayNode* node);
 
 	double getExtentTop() const {
-		return this->relativeLayout.extentTop;
+		return this->relativeLayoutResolver.extentTop;
 	}
 
 	double getExtentLeft() const {
-		return this->relativeLayout.extentLeft;
+		return this->relativeLayoutResolver.extentLeft;
 	}
 
 	double getExtentRight() const {
-		return this->relativeLayout.extentRight;
+		return this->relativeLayoutResolver.extentRight;
 	}
 
 	double getExtentBottom() const {
-		return this->relativeLayout.extentBottom;
+		return this->relativeLayoutResolver.extentBottom;
 	}
 
 	double getExtentWidth() const {
@@ -50,12 +50,12 @@ public:
 		return this->getExtentBottom() - this->getExtentTop();
 	}
 
-	void measureAbsoluteNode(DisplayNode* node) {
-		this->absoluteLayout.measure(node);
+	void measureAbsoluteNode(DisplayNode* node, double &w, double &h) {
+		this->absoluteLayoutResolver.measure(node, w, h);
 	}
 
-	void measureRelativeNode(DisplayNode* node, double &remainingW, double &remainingH, double &remainder) {
-		this->relativeLayout.measure(node, remainingW, remainingH, remainder);
+	void measureRelativeNode(DisplayNode* node, double &w, double &h, double &remainingW, double &remainingH, double &remainder) {
+		this->relativeLayoutResolver.measure(node, w, h, remainingW, remainingH, remainder);
 	}
 
 	void prepare();

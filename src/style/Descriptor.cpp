@@ -44,7 +44,7 @@ Descriptor::matchPath(DisplayNode* node, Importance& importance)
 	} else {
 
 		test = test->getParent();
-		node = node->getParent();
+		node = node->getHolder();
 
 	}
 
@@ -64,8 +64,7 @@ Descriptor::matchPath(DisplayNode* node, Importance& importance)
 			 * the root of a sealed node.
 			 */
 
-			if (node->isSealed() ||
-				node->isWindow()) {
+			if (node->isWindow()) {
 				break;
 			}
 
@@ -73,7 +72,7 @@ Descriptor::matchPath(DisplayNode* node, Importance& importance)
 			 * Try the same selector fragment with the parent node.
 			 */
 
-			 node = node->getParent();
+			 node = node->getHolder();
 
 			 continue;
 		}
@@ -86,7 +85,7 @@ Descriptor::matchPath(DisplayNode* node, Importance& importance)
 		} else {
 
 			test = test->getParent();
-			node = node->getParent();
+			node = node->getHolder();
 
 		}
 

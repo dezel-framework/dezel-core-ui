@@ -30,13 +30,6 @@ void DisplayNodeDelete(DisplayNodeRef node);
 void DisplayNodeSetDisplay(DisplayNodeRef node, DisplayRef display);
 
 /**
- * @function DisplayNodeSetSealed
- * @since 0.2.0
- * @hidden
- */
-void DisplayNodeSetSealed(DisplayNodeRef node);
-
-/**
  * @function DisplayNodeSetRoot
  * @since 0.2.0
  * @hidden
@@ -111,21 +104,21 @@ bool DisplayNodeHasState(DisplayNodeRef node, const char* state);
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetAnchorTop(DisplayNodeRef node, AnchorType type, AnchorUnit unit, double length);
+void DisplayNodeSetAnchorTop(DisplayNodeRef node, DisplayNodeAnchorType type, DisplayNodeAnchorUnit unit, double length);
 
 /**
  * @function DisplayNodeSetAnchorLeft
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetAnchorLeft(DisplayNodeRef node, AnchorType type, AnchorUnit unit, double length);
+void DisplayNodeSetAnchorLeft(DisplayNodeRef node, DisplayNodeAnchorType type, DisplayNodeAnchorUnit unit, double length);
 
 /**
  * @function DisplayNodeSetTop
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetTop(DisplayNodeRef node, OriginType type, OriginUnit unit, double length);
+void DisplayNodeSetTop(DisplayNodeRef node, DisplayNodePositionType type, DisplayNodePositionUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMinTop
@@ -146,7 +139,7 @@ void DisplayNodeSetMaxTop(DisplayNodeRef node, double max);
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetLeft(DisplayNodeRef node, OriginType type, OriginUnit unit, double length);
+void DisplayNodeSetLeft(DisplayNodeRef node, DisplayNodePositionType type, DisplayNodePositionUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMinLeft
@@ -167,7 +160,7 @@ void DisplayNodeSetMaxLeft(DisplayNodeRef node, double max);
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetRight(DisplayNodeRef node, OriginType type, OriginUnit unit, double length);
+void DisplayNodeSetRight(DisplayNodeRef node, DisplayNodePositionType type, DisplayNodePositionUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMinRight
@@ -188,7 +181,7 @@ void DisplayNodeSetMaxRight(DisplayNodeRef node, double max);
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetBottom(DisplayNodeRef node, OriginType type, OriginUnit unit, double length);
+void DisplayNodeSetBottom(DisplayNodeRef node, DisplayNodePositionType type, DisplayNodePositionUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMinBottom
@@ -209,7 +202,7 @@ void DisplayNodeSetMaxBottom(DisplayNodeRef node, double max);
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetWidth(DisplayNodeRef node, SizeType type, SizeUnit unit, double length);
+void DisplayNodeSetWidth(DisplayNodeRef node, DisplayNodeSizeType type, DisplayNodeSizeUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMinWidth
@@ -230,7 +223,7 @@ void DisplayNodeSetMaxWidth(DisplayNodeRef node, double max);
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetHeight(DisplayNodeRef node, SizeType type, SizeUnit unit, double length);
+void DisplayNodeSetHeight(DisplayNodeRef node, DisplayNodeSizeType type, DisplayNodeSizeUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMinHeight
@@ -251,119 +244,119 @@ void DisplayNodeSetMaxHeight(DisplayNodeRef node, double max);
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetContentDirection(DisplayNodeRef node, ContentDirection direction);
+void DisplayNodeSetContentDirection(DisplayNodeRef node, DisplayNodeContentDirection direction);
 
 /**
  * @function DisplayNodeSetContentAlignment
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetContentAlignment(DisplayNodeRef node, ContentAlignment alignment);
+void DisplayNodeSetContentAlignment(DisplayNodeRef node, DisplayNodeContentAlignment alignment);
 
 /**
  * @function DisplayNodeSetContentDisposition
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetContentDisposition(DisplayNodeRef node, ContentDisposition placement);
+void DisplayNodeSetContentDisposition(DisplayNodeRef node, DisplayNodeContentDisposition placement);
 
 /**
  * @function DisplayNodeSetContentTop
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetContentTop(DisplayNodeRef node, ContentOriginType type, ContentOriginUnit unit, double length);
+void DisplayNodeSetContentTop(DisplayNodeRef node, DisplayNodeContentPositionType type, DisplayNodeContentPositionUnit unit, double length);
 
 /**
  * @function DisplayNodeSetContentLeft
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetContentLeft(DisplayNodeRef node, ContentOriginType type, ContentOriginUnit unit, double length);
+void DisplayNodeSetContentLeft(DisplayNodeRef node, DisplayNodeContentPositionType type, DisplayNodeContentPositionUnit unit, double length);
 
 /**
  * @function DisplayNodeSetContentWidth
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetContentWidth(DisplayNodeRef node, ContentSizeType type, ContentSizeUnit unit, double length);
+void DisplayNodeSetContentWidth(DisplayNodeRef node, DisplayNodeContentSizeType type, DisplayNodeContentSizeUnit unit, double length);
 
 /**
  * @function DisplayNodeSetContentHeight
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetContentHeight(DisplayNodeRef node, ContentSizeType type, ContentSizeUnit unit, double length);
+void DisplayNodeSetContentHeight(DisplayNodeRef node, DisplayNodeContentSizeType type, DisplayNodeContentSizeUnit unit, double length);
 
 /**
- * @function DisplayNodeSetExpandFactor
+ * @function DisplayNodeSetExpandRatio
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetExpandFactor(DisplayNodeRef node, double factor);
+void DisplayNodeSetExpandRatio(DisplayNodeRef node, double ratio);
 
 /**
- * @function DisplayNodeSetShrinkFactorable
+ * @function DisplayNodeSetShrinkRatio
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetShrinkFactor(DisplayNodeRef node, double factor);
+void DisplayNodeSetShrinkRatio(DisplayNodeRef node, double ratio);
 
 /**
  * @function DisplayNodeSetBorderTop
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetBorderTop(DisplayNodeRef node, BorderType type, BorderUnit unit, double length);
+void DisplayNodeSetBorderTop(DisplayNodeRef node, DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length);
 
 /**
  * @function DisplayNodeSetBorderLeft
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetBorderLeft(DisplayNodeRef node, BorderType type, BorderUnit unit, double length);
+void DisplayNodeSetBorderLeft(DisplayNodeRef node, DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length);
 
 /**
  * @function DisplayNodeSetBorderRight
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetBorderRight(DisplayNodeRef node, BorderType type, BorderUnit unit, double length);
+void DisplayNodeSetBorderRight(DisplayNodeRef node, DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length);
 
 /**
  * @function DisplayNodeSetBorderBottom
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetBorderBottom(DisplayNodeRef node, BorderType type, BorderUnit unit, double length);
+void DisplayNodeSetBorderBottom(DisplayNodeRef node, DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMarginTop
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetMarginTop(DisplayNodeRef node, MarginType type, MarginUnit unit, double length);
+void DisplayNodeSetMarginTop(DisplayNodeRef node, DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMarginLeft
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetMarginLeft(DisplayNodeRef node, MarginType type, MarginUnit unit, double length);
+void DisplayNodeSetMarginLeft(DisplayNodeRef node, DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMarginRight
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetMarginRight(DisplayNodeRef node, MarginType type, MarginUnit unit, double length);
+void DisplayNodeSetMarginRight(DisplayNodeRef node, DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMarginBottom
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetMarginBottom(DisplayNodeRef node, MarginType type, MarginUnit unit, double length);
+void DisplayNodeSetMarginBottom(DisplayNodeRef node, DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMinMarginTop
@@ -426,28 +419,28 @@ void DisplayNodeSetMaxMarginBottom(DisplayNodeRef node, double max);
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetPaddingTop(DisplayNodeRef node, PaddingType type, PaddingUnit unit, double length);
+void DisplayNodeSetPaddingTop(DisplayNodeRef node, DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length);
 
 /**
  * @function DisplayNodeSetPaddingLeft
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetPaddingLeft(DisplayNodeRef node, PaddingType type, PaddingUnit unit, double length);
+void DisplayNodeSetPaddingLeft(DisplayNodeRef node, DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length);
 
 /**
  * @function DisplayNodeSetPaddingRight
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetPaddingRight(DisplayNodeRef node, PaddingType type, PaddingUnit unit, double length);
+void DisplayNodeSetPaddingRight(DisplayNodeRef node, DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length);
 
 /**
  * @function DisplayNodeSetPaddingBottom
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetPaddingBottom(DisplayNodeRef node, PaddingType type, PaddingUnit unit, double length);
+void DisplayNodeSetPaddingBottom(DisplayNodeRef node, DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length);
 
 /**
  * @function DisplayNodeSetMinPaddingTop
@@ -800,18 +793,25 @@ void DisplayNodeSetResolveInnerSizeCallback(DisplayNodeRef node, DisplayNodeCall
 void DisplayNodeSetResolveContentSizeCallback(DisplayNodeRef node, DisplayNodeCallback callback);
 
 /**
- * @function DisplayNodeSetResolveMarginsCallback
+ * @function DisplayNodeSetResolveContentPositionCallback
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetResolveMarginsCallback(DisplayNodeRef node, DisplayNodeCallback callback);
+void DisplayNodeSetResolveContentPositionCallback(DisplayNodeRef node, DisplayNodeCallback callback);
 
 /**
- * @function DisplayNodeSetResolveBordersCallback
+ * @function DisplayNodeSetResolveMarginCallback
  * @since 0.1.0
  * @hidden
  */
-void DisplayNodeSetResolveBordersCallback(DisplayNodeRef node, DisplayNodeCallback callback);
+void DisplayNodeSetResolveMarginCallback(DisplayNodeRef node, DisplayNodeCallback callback);
+
+/**
+ * @function DisplayNodeSetResolveBorderCallback
+ * @since 0.1.0
+ * @hidden
+ */
+void DisplayNodeSetResolveBorderCallback(DisplayNodeRef node, DisplayNodeCallback callback);
 
 /**
  * @function DisplayNodeSetResolvePaddingCallback

@@ -24,7 +24,6 @@ Display::setWindow(DisplayNode* window)
 {
 	this->window = window;
 	this->window->setWindow();
-	this->window->setSealed();
 	this->invalidate();
 }
 
@@ -76,7 +75,7 @@ Display::setStylesheet(Stylesheet* stylesheet)
 
 		while (walker.hasNext()) {
 			walker.getNode()->reset();
-			walker.getNode()->invalidateTraits();
+			walker.getNode()->invalidateValues();
 			walker.getNext();
 		}
 	}
@@ -93,17 +92,23 @@ Display::invalidate()
 }
 
 void
+Display::measure()
+{
+    // TODO
+}
+
+void
 Display::resolve()
 {
+    if (this->resolving) {
+        return;
+    }
+    
 	if (this->window == nullptr) {
 		return;
 	}
 
 	if (this->invalid == false) {
-		return;
-	}
-
-	if (this->resolving) {
 		return;
 	}
 	
@@ -117,28 +122,22 @@ Display::resolve()
 		walker.getNode()->resolve();
 		walker.getNext();
 	}
-
+    
+    walker.reset();
+    
+    while (walker.hasNext()) {
+        walker.getNode()->finish();
+        walker.getNext();
+    }
+    
 	this->didResolve();
-
-	this->cleanup();
-
+    
 	this->resolving = false;
 
 	this->viewportWidthChanged = false;
 	this->viewportHeightChanged = false;
 
 	this->invalid = false;
-}
-
-void
-Display::cleanup()
-{
-	DisplayNodeWalker wakler(this->window);
-
-	while (wakler.hasNext()) {
-		wakler.getNode()->cleanup();
-		wakler.getNext();
-	}
 }
 
 }

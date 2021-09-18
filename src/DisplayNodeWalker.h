@@ -15,7 +15,8 @@ class DisplayNodeWalker {
 private:
 
 	queue<DisplayNode*> queue;
-
+    
+    DisplayNode* root;
 	DisplayNode* node;
 
 	void consume() {
@@ -40,6 +41,7 @@ public:
 
 	bool hasNext();
 	void getNext();
+    void reset();
 
 };
 

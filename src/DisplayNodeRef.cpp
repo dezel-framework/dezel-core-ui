@@ -24,15 +24,9 @@ DisplayNodeSetDisplay(DisplayNodeRef node, DisplayRef display)
 }
 
 void
-DisplayNodeSetSealed(DisplayNodeRef node)
-{
-	reinterpret_cast<DisplayNode*>(node)->setSealed();
-}
-
-void
 DisplayNodeSetRoot(DisplayNodeRef node, DisplayNodeRef root)
 {
-	reinterpret_cast<DisplayNode*>(node)->setRoot(reinterpret_cast<DisplayNode*>(root));
+    reinterpret_cast<DisplayNode*>(node)->setRoot(reinterpret_cast<DisplayNode*>(root));
 }
 
 void
@@ -90,19 +84,19 @@ DisplayNodeHasState(DisplayNodeRef node, const char* state)
 }
 
 void
-DisplayNodeSetAnchorTop(DisplayNodeRef node, AnchorType type, AnchorUnit unit, double length)
+DisplayNodeSetAnchorTop(DisplayNodeRef node, DisplayNodeAnchorType type, DisplayNodeAnchorUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setAnchorTop(type, unit, length);
 }
 
 void
-DisplayNodeSetAnchorLeft(DisplayNodeRef node, AnchorType type, AnchorUnit unit, double length)
+DisplayNodeSetAnchorLeft(DisplayNodeRef node, DisplayNodeAnchorType type, DisplayNodeAnchorUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setAnchorLeft(type, unit, length);
 }
 
 void
-DisplayNodeSetTop(DisplayNodeRef node, OriginType type, OriginUnit unit, double length)
+DisplayNodeSetTop(DisplayNodeRef node, DisplayNodePositionType type, DisplayNodePositionUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setTop(type, unit, length);
 }
@@ -120,7 +114,7 @@ DisplayNodeSetMaxTop(DisplayNodeRef node, double max)
 }
 
 void
-DisplayNodeSetLeft(DisplayNodeRef node, OriginType type, OriginUnit unit, double length)
+DisplayNodeSetLeft(DisplayNodeRef node, DisplayNodePositionType type, DisplayNodePositionUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setLeft(type, unit, length);
 }
@@ -138,7 +132,7 @@ DisplayNodeSetMaxLeft(DisplayNodeRef node, double max)
 }
 
 void
-DisplayNodeSetRight(DisplayNodeRef node, OriginType type, OriginUnit unit, double length)
+DisplayNodeSetRight(DisplayNodeRef node, DisplayNodePositionType type, DisplayNodePositionUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setRight(type, unit, length);
 }
@@ -156,7 +150,7 @@ DisplayNodeSetMaxRight(DisplayNodeRef node, double max)
 }
 
 void
-DisplayNodeSetBottom(DisplayNodeRef node, OriginType type, OriginUnit unit, double length)
+DisplayNodeSetBottom(DisplayNodeRef node, DisplayNodePositionType type, DisplayNodePositionUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setBottom(type, unit, length);
 }
@@ -174,7 +168,7 @@ DisplayNodeSetMaxBottom(DisplayNodeRef node, double max)
 }
 
 void
-DisplayNodeSetWidth(DisplayNodeRef node, SizeType type, SizeUnit unit, double length)
+DisplayNodeSetWidth(DisplayNodeRef node, DisplayNodeSizeType type, DisplayNodeSizeUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setWidth(type, unit, length);
 }
@@ -192,7 +186,7 @@ DisplayNodeSetMaxWidth(DisplayNodeRef node, double max)
 }
 
 void
-DisplayNodeSetHeight(DisplayNodeRef node, SizeType type, SizeUnit unit, double length)
+DisplayNodeSetHeight(DisplayNodeRef node, DisplayNodeSizeType type, DisplayNodeSizeUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setHeight(type, unit, length);
 }
@@ -210,103 +204,103 @@ DisplayNodeSetMaxHeight(DisplayNodeRef node, double max)
 }
 
 void
-DisplayNodeSetContentDirection(DisplayNodeRef node, ContentDirection direction)
+DisplayNodeSetContentDirection(DisplayNodeRef node, DisplayNodeContentDirection direction)
 {
 	reinterpret_cast<DisplayNode*>(node)->setContentDirection(direction);
 }
 
 void
-DisplayNodeSetContentAlignment(DisplayNodeRef node, ContentAlignment alignment)
+DisplayNodeSetContentAlignment(DisplayNodeRef node, DisplayNodeContentAlignment alignment)
 {
 	reinterpret_cast<DisplayNode*>(node)->setContentAlignment(alignment);
 }
 
 void
-DisplayNodeSetContentDisposition(DisplayNodeRef node, ContentDisposition location)
+DisplayNodeSetContentDisposition(DisplayNodeRef node, DisplayNodeContentDisposition location)
 {
 	reinterpret_cast<DisplayNode*>(node)->setContentDisposition(location);
 }
 
 void
-DisplayNodeSetContentTop(DisplayNodeRef node, ContentOriginType type, ContentOriginUnit unit, double length)
+DisplayNodeSetContentTop(DisplayNodeRef node, DisplayNodeContentPositionType type, DisplayNodeContentPositionUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setContentTop(type, unit, length);
 }
 
 void
-DisplayNodeSetContentLeft(DisplayNodeRef node, ContentOriginType type, ContentOriginUnit unit, double length)
+DisplayNodeSetContentLeft(DisplayNodeRef node, DisplayNodeContentPositionType type, DisplayNodeContentPositionUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setContentLeft(type, unit, length);
 }
 
 void
-DisplayNodeSetContentWidth(DisplayNodeRef node, ContentSizeType type, ContentSizeUnit unit, double length)
+DisplayNodeSetContentWidth(DisplayNodeRef node, DisplayNodeContentSizeType type, DisplayNodeContentSizeUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setContentWidth(type, unit, length);
 }
 
 void
-DisplayNodeSetContentHeight(DisplayNodeRef node, ContentSizeType type, ContentSizeUnit unit, double length)
+DisplayNodeSetContentHeight(DisplayNodeRef node, DisplayNodeContentSizeType type, DisplayNodeContentSizeUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setContentHeight(type, unit, length);
 }
 
 void
-DisplayNodeSetExpandFactor(DisplayNodeRef node, double factor)
+DisplayNodeSetExpandRatio(DisplayNodeRef node, double ratio)
 {
-	reinterpret_cast<DisplayNode*>(node)->setExpandFactor(factor);
+	reinterpret_cast<DisplayNode*>(node)->setExpandRatio(ratio);
 }
 
 void
-DisplayNodeSetShrinkFactor(DisplayNodeRef node, double factor)
+DisplayNodeSetShrinkRatio(DisplayNodeRef node, double ratio)
 {
-	reinterpret_cast<DisplayNode*>(node)->setShrinkFactor(factor);
+	reinterpret_cast<DisplayNode*>(node)->setShrinkRatio(ratio);
 }
 
 void
-DisplayNodeSetBorderTop(DisplayNodeRef node, BorderType type, BorderUnit unit, double length)
+DisplayNodeSetBorderTop(DisplayNodeRef node, DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setBorderTop(type, unit, length);
 }
 
 void
-DisplayNodeSetBorderLeft(DisplayNodeRef node, BorderType type, BorderUnit unit, double length)
+DisplayNodeSetBorderLeft(DisplayNodeRef node, DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setBorderLeft(type, unit, length);
 }
 
 void
-DisplayNodeSetBorderRight(DisplayNodeRef node, BorderType type, BorderUnit unit, double length)
+DisplayNodeSetBorderRight(DisplayNodeRef node, DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setBorderRight(type, unit, length);
 }
 
 void
-DisplayNodeSetBorderBottom(DisplayNodeRef node, BorderType type, BorderUnit unit, double length)
+DisplayNodeSetBorderBottom(DisplayNodeRef node, DisplayNodeBorderType type, DisplayNodeBorderUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setBorderBottom(type, unit, length);
 }
 
 void
-DisplayNodeSetMarginTop(DisplayNodeRef node, MarginType type, MarginUnit unit, double length)
+DisplayNodeSetMarginTop(DisplayNodeRef node, DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setMarginTop(type, unit, length);
 }
 
 void
-DisplayNodeSetMarginLeft(DisplayNodeRef node, MarginType type, MarginUnit unit, double length)
+DisplayNodeSetMarginLeft(DisplayNodeRef node, DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setMarginLeft(type, unit, length);
 }
 
 void
-DisplayNodeSetMarginRight(DisplayNodeRef node, MarginType type, MarginUnit unit, double length)
+DisplayNodeSetMarginRight(DisplayNodeRef node, DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setMarginRight(type, unit, length);
 }
 
 void
-DisplayNodeSetMarginBottom(DisplayNodeRef node, MarginType type, MarginUnit unit, double length)
+DisplayNodeSetMarginBottom(DisplayNodeRef node, DisplayNodeMarginType type, DisplayNodeMarginUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setMarginBottom(type, unit, length);
 }
@@ -360,25 +354,25 @@ DisplayNodeSetMaxMarginBottom(DisplayNodeRef node, double max)
 }
 
 void
-DisplayNodeSetPaddingTop(DisplayNodeRef node, PaddingType type, PaddingUnit unit, double length)
+DisplayNodeSetPaddingTop(DisplayNodeRef node, DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setPaddingTop(type, unit, length);
 }
 
 void
-DisplayNodeSetPaddingLeft(DisplayNodeRef node, PaddingType type, PaddingUnit unit, double length)
+DisplayNodeSetPaddingLeft(DisplayNodeRef node, DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setPaddingLeft(type, unit, length);
 }
 
 void
-DisplayNodeSetPaddingRight(DisplayNodeRef node, PaddingType type, PaddingUnit unit, double length)
+DisplayNodeSetPaddingRight(DisplayNodeRef node, DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setPaddingRight(type, unit, length);
 }
 
 void
-DisplayNodeSetPaddingBottom(DisplayNodeRef node, PaddingType type, PaddingUnit unit, double length)
+DisplayNodeSetPaddingBottom(DisplayNodeRef node, DisplayNodePaddingType type, DisplayNodePaddingUnit unit, double length)
 {
 	reinterpret_cast<DisplayNode*>(node)->setPaddingBottom(type, unit, length);
 }
@@ -620,7 +614,7 @@ DisplayNodeInvalidateSize(DisplayNodeRef node)
 void
 DisplayNodeInvalidateOrigin(DisplayNodeRef node)
 {
-	reinterpret_cast<DisplayNode*>(node)->invalidateOrigin();
+	reinterpret_cast<DisplayNode*>(node)->invalidatePosition();
 }
 
 void
@@ -638,7 +632,7 @@ DisplayNodeResolve(DisplayNodeRef node)
 void
 DisplayNodeResolveTraits(DisplayNodeRef node)
 {
-	reinterpret_cast<DisplayNode*>(node)->resolveTraits();
+	reinterpret_cast<DisplayNode*>(node)->resolveValues();
 }
 
 void
@@ -668,7 +662,7 @@ DisplayNodeSetResolveSizeCallback(DisplayNodeRef node, DisplayNodeCallback callb
 void
 DisplayNodeSetResolveOriginCallback(DisplayNodeRef node, DisplayNodeCallback callback)
 {
-	reinterpret_cast<DisplayNode*>(node)->setResolveOriginCallback(callback);
+	reinterpret_cast<DisplayNode*>(node)->setResolvePositionCallback(callback);
 }
 
 void
@@ -684,15 +678,21 @@ DisplayNodeSetResolveContentSizeCallback(DisplayNodeRef node, DisplayNodeCallbac
 }
 
 void
-DisplayNodeSetResolveMarginsCallback(DisplayNodeRef node, DisplayNodeCallback callback)
+DisplayNodeSetResolveContentPositionCallback(DisplayNodeRef node, DisplayNodeCallback callback)
 {
-	reinterpret_cast<DisplayNode*>(node)->setResolveMarginsCallback(callback);
+	reinterpret_cast<DisplayNode*>(node)->setResolveContentPositionCallback(callback);
 }
 
 void
-DisplayNodeSetResolveBordersCallback(DisplayNodeRef node, DisplayNodeCallback callback)
+DisplayNodeSetResolveMarginCallback(DisplayNodeRef node, DisplayNodeCallback callback)
 {
-	reinterpret_cast<DisplayNode*>(node)->setResolveBordersCallback(callback);
+	reinterpret_cast<DisplayNode*>(node)->setResolveMarginCallback(callback);
+}
+
+void
+DisplayNodeSetResolveBorderCallback(DisplayNodeRef node, DisplayNodeCallback callback)
+{
+	reinterpret_cast<DisplayNode*>(node)->setResolveBorderCallback(callback);
 }
 
 void

@@ -5,6 +5,8 @@ namespace Dezel {
 
 DisplayNodeWalker::DisplayNodeWalker(DisplayNode* root)
 {
+    this->root = root;
+    this->node = root;
 	this->queue.push(root);
 }
 
@@ -30,6 +32,13 @@ DisplayNodeWalker::getNext() {
 	for (auto child : children) if (child->isVisible()) {
 		this->enqueue(child);
 	}
+}
+
+void
+DisplayNodeWalker::reset()
+{
+    this->queue = std::queue<DisplayNode*>();
+    this->queue.push(this->root);
 }
 
 }

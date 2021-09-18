@@ -11,14 +11,14 @@ class DisplayNodeSize {
 
 public:
 
-	SizeType type = kSizeTypeFill;
-	SizeUnit unit = kSizeUnitNone;
+	DisplayNodeSizeType type = kDisplayNodeSizeTypeFill;
+	DisplayNodeSizeUnit unit = kDisplayNodeSizeUnitNone;
 
 	double length = 0;
 	double min = 0;
 	double max = ABS_DBL_MAX;
 
-	bool equals(SizeType type, SizeUnit unit, double length) {
+	bool equals(DisplayNodeSizeType type, DisplayNodeSizeUnit unit, double length) {
 		return (
 			this->type == type &&
 			this->unit == unit &&

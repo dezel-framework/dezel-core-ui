@@ -24,7 +24,7 @@ private:
 	vector<DisplayNode*> nodes;
 
 	bool hasInvalidSize(DisplayNode* node);
-	bool hasInvalidOrigin(DisplayNode* node);
+	bool hasInvalidPosition(DisplayNode* node);
 
 	double measureTop(DisplayNode* node);
 	double measureLeft(DisplayNode* node);
@@ -43,8 +43,8 @@ public:
 		this->nodes.push_back(node);
 	}
 
-	void measure(DisplayNode* node);
 	void resolve();
+    void measure(DisplayNode* node, double &w, double &h);
 
 };
 

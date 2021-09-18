@@ -37,7 +37,7 @@ private:
 	}
 
 	bool hasInvalidSize(DisplayNode* node);
-	bool hasInvalidOrigin(DisplayNode* node);
+	bool hasInvalidPosition(DisplayNode* node);
 
 	double measureWidth(DisplayNode* node, double remaining);
 	double measureHeight(DisplayNode* node, double remaining);
@@ -59,8 +59,8 @@ public:
 		this->nodes.push_back(node);
 	}
 
-	void measure(DisplayNode* child, double &remainingW, double &remainingH, double &remainder);
 	void resolve();
+    void measure(DisplayNode* node, double &w, double &h, double &remainingW, double &remainingH, double &remainder);
 
 };
 
