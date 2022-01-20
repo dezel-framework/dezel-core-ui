@@ -295,9 +295,7 @@ protected:
 	}
 
     void didResolveContentPosition() {
-		std::cout << "TEST ??? \n";
 		if (this->resolveContentPositionCallback) {
-			std::cout << "TEST !!! \n";
             this->resolveContentPositionCallback(reinterpret_cast<DisplayNodeRef>(this));
         }
     }

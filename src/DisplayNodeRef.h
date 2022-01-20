@@ -31,14 +31,14 @@ void DisplayNodeSetDisplay(DisplayNodeRef node, DisplayRef display);
 
 /**
  * @function DisplayNodeSetRoot
- * @since 0.2.0
+ * @since 0.1.0
  * @hidden
  */
 void DisplayNodeSetRoot(DisplayNodeRef node, DisplayNodeRef root);
 
 /**
  * @function DisplayNodeSetHost
- * @since 0.2.0
+ * @since 0.1.0
  * @hidden
  */
 void DisplayNodeSetHost(DisplayNodeRef node, DisplayNodeRef root);
